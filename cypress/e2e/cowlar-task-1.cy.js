@@ -23,7 +23,7 @@ describe('Task 1: Form Submission Test', () => {
     cy.get('#state').click().find('div[id^="react-select-"]').contains('NCR').click();
     cy.get('#city').click().find('div[id^="react-select-"]').contains('Delhi').click();
     cy.get('#submit').click();
-    cy.get('body > div.fade.modal.show > div > div > div.modal-body > div > table > tbody').within(() => {
+    cy.get('.modal-content .table tbody').within(() => {
       const expectedValues = ['Cowlar Developer', 'qaengineer@cowlar.com', 'Male', '0123456789', '05 December,2023', 'Computer Science', 'Music','', 'Address 1', 'NCR Delhi'];
       expectedValues.forEach((value, index) => {
         cy.get(`:nth-child(${index + 1}) > :nth-child(2)`).should('have.text', value);
