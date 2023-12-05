@@ -13,9 +13,7 @@ describe('Book Store API Test', () => {
       cy.get('#app > div > div > div.home-body > div > div:nth-child(6)').click();
       cy.get('#app > div > div > div.pattern-backgound.playgound-header > div').should('have.text', 'Book Store');
       cy.get(':nth-child(6) > .element-list > .menu-list > #item-2').click();
-    })
-    it('API Response & Title Confirmation', () => {
-    cy.intercept('GET', 'https://demoqa.com/BookStore/v1/Book?ISBN=9781593277574').as('bookDetails')
+      cy.intercept('GET', 'https://demoqa.com/BookStore/v1/Book?ISBN=9781593277574').as('bookDetails')
       cy.contains('Understanding ECMAScript 6').click();
       cy.wait('@bookDetails').its('response.body').should('deep.equal', {
         isbn: "9781593277574",
@@ -29,5 +27,5 @@ describe('Book Store API Test', () => {
         website: "https://leanpub.com/understandinges6/read"
       });
       cy.get('#title-wrapper > .col-md-9').should('have.text', 'Understanding ECMAScript 6');
-    });
+    })
   });

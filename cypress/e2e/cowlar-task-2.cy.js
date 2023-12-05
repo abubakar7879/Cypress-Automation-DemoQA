@@ -6,13 +6,10 @@ beforeEach(() => {
     });
 });
 describe('Interactions Page Test', () => {
-    it('Navigating To Interaction Page', () => {
+    it('Verification For Interaction Page', () => {
         cy.visit('https://demoqa.com/');
         cy.get('#app > header > a > img').should('have.attr', 'src', '/images/Toolsqa.jpg');
         cy.get('#app > div > div > div.home-body > div > div:nth-child(5)').click();
-    });
-
-    it('Verification For Interaction Page', () => {
         cy.get('#app > div > div > div.pattern-backgound.playgound-header > div').should('have.text', 'Interactions');
         cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(1)').should('contain', 'Elements');
         cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(2)').should('contain', 'Forms');
@@ -22,8 +19,6 @@ describe('Interactions Page Test', () => {
         cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(6)').should('contain', 'Book Store Application');
         cy.get(':nth-child(5) > .element-list > .menu-list > #item-2').click();
         cy.get('#app > div > div > div.pattern-backgound.playgound-header > div').should('have.text', 'Resizable');
-    })
-    it('Resizes Box 1', () => {
         cy.get('#resizableBoxWithRestriction').should('have.css', 'height', '200px');
         cy.get('#resizableBoxWithRestriction').should('have.css', 'width', '200px');
         cy.get('#resizableBoxWithRestriction > span')
@@ -36,9 +31,6 @@ describe('Interactions Page Test', () => {
         .trigger('mousedown', { which: 1 })
         .trigger('mousemove', { clientX: 50, clientY: 50 })
         .trigger('mouseup');
-
-    });
-    it('Resizes Box 2', () => {
         cy.get('#resizable').should('have.css', 'height', '200px');
         cy.get('#resizable').should('have.css', 'width', '200px');
         cy.get('#resizable > span')
@@ -47,6 +39,5 @@ describe('Interactions Page Test', () => {
             .trigger('mouseup');
         cy.get('#resizable').invoke('outerWidth').should('be.lessThan', 200);
         cy.get('#resizable').invoke('outerHeight').should('be.lessThan', 200);
-
-        });
+    })
 });

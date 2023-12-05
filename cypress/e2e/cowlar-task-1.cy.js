@@ -1,5 +1,5 @@
 beforeEach(() => {
-  cy.viewport(2128,1034);
+  cy.viewport(2128, 1034);
   cy.on('uncaught:exception', (err, runnable) => {
     console.log('Uncaught Exception:', err);
     return false;
@@ -23,17 +23,11 @@ describe('Task 1: Form Submission Test', () => {
     cy.get('#state').click().find('div[id^="react-select-"]').contains('NCR').click();
     cy.get('#city').click().find('div[id^="react-select-"]').contains('Delhi').click();
     cy.get('#submit').click();
-  });
-  it('Validates the form submission', () => {
-      cy.get('tbody > :nth-child(1) > :nth-child(2)').should('have.text', 'Cowlar Developer');
-      cy.get('tbody > :nth-child(2) > :nth-child(2)').should('have.text', 'qaengineer@cowlar.com');
-      cy.get('tbody > :nth-child(3) > :nth-child(2)').should('have.text', 'Male');
-      cy.get('tbody > :nth-child(4) > :nth-child(2)').should('have.text', '0123456789');
-      cy.get('tbody > :nth-child(5) > :nth-child(2)').should('have.text', '05 December,2023');
-      cy.get('tbody > :nth-child(6) > :nth-child(2)').should('have.text', 'Computer Science');
-      cy.get('tbody > :nth-child(7) > :nth-child(2)').should('have.text', 'Music');
-      cy.get('tbody > :nth-child(9) > :nth-child(2)').should('have.text', 'Address 1');
-      cy.get('tbody > :nth-child(10) > :nth-child(2)').should('have.text', 'NCR Delhi');
-      cy.get('#closeLargeModal').click();
+    cy.get('body > div.fade.modal.show > div > div > div.modal-body > div > table > tbody').within(() => {
+      const expectedValues = ['Cowlar Developer', 'qaengineer@cowlar.com', 'Male', '0123456789', '05 December,2023', 'Computer Science', 'Music','', 'Address 1', 'NCR Delhi'];
+      expectedValues.forEach((value, index) => {
+        cy.get(`:nth-child(${index + 1}) > :nth-child(2)`).should('have.text', value);
+      });
+    });
   });
 });
