@@ -8,17 +8,22 @@ beforeEach(() => {
 describe('Interactions Page Test', () => {
     it('Verification For Interaction Page', () => {
         cy.visit('https://demoqa.com/');
-        cy.get('#app > header > a > img').should('have.attr', 'src', '/images/Toolsqa.jpg');
-        cy.get('#app > div > div > div.home-body > div > div:nth-child(5)').click();
-        cy.get('#app > div > div > div.pattern-backgound.playgound-header > div').should('have.text', 'Interactions');
-        cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(1)').should('contain', 'Elements');
-        cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(2)').should('contain', 'Forms');
-        cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(3)').should('contain', 'Alerts, Frame & Windows');
-        cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(4)').should('contain', 'Widgets');
-        cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(5)').should('contain', 'Interactions');
-        cy.get('#app > div > div > div.row > div:nth-child(1) > div > div > div:nth-child(6)').should('contain', 'Book Store Application');
+        cy.get('header > a > img[src="/images/Toolsqa.jpg"]').should('have.attr', 'src', '/images/Toolsqa.jpg');
+        cy.get('.category-cards .card').contains('h5', 'Interactions').click();
+        cy.get('.playgound-header .main-header').should('have.text', 'Interactions');
+        cy.get('.left-pannel .accordion .element-group').each(($it, index) => {
+            const expectedTexts = [
+                'Elements',
+                'Forms',
+                'Alerts, Frame & Windows',
+                'Widgets',
+                'Interactions',
+                'Book Store Application'
+            ];
+            expect($it).to.contain(expectedTexts[index]);
+        });
         cy.get(':nth-child(5) > .element-list > .menu-list > #item-2').click();
-        cy.get('#app > div > div > div.pattern-backgound.playgound-header > div').should('have.text', 'Resizable');
+        cy.get('.playgound-header .main-header').should('have.text', 'Resizable');
         cy.get('#resizableBoxWithRestriction').should('have.css', 'height', '200px');
         cy.get('#resizableBoxWithRestriction').should('have.css', 'width', '200px');
         cy.get('#resizableBoxWithRestriction > span')

@@ -9,9 +9,9 @@ beforeEach(() => {
 describe('Book Store API Test', () => {
     it('Book Store Navigation Test', () => {
       cy.visit('https://demoqa.com/');
-      cy.get('#app > header > a > img').should('have.attr', 'src', '/images/Toolsqa.jpg');
-      cy.get('#app > div > div > div.home-body > div > div:nth-child(6)').click();
-      cy.get('#app > div > div > div.pattern-backgound.playgound-header > div').should('have.text', 'Book Store');
+      cy.get('header > a > img[src="/images/Toolsqa.jpg"]').should('have.attr', 'src', '/images/Toolsqa.jpg');
+      cy.get('.category-cards .card').contains('h5', 'Book Store Application').click();
+      cy.get('.playgound-header .main-header').should('have.text', 'Book Store');
       cy.get(':nth-child(6) > .element-list > .menu-list > #item-2').click();
       cy.intercept('GET', 'https://demoqa.com/BookStore/v1/Book?ISBN=9781593277574').as('bookDetails')
       cy.contains('Understanding ECMAScript 6').click();
@@ -26,6 +26,6 @@ describe('Book Store API Test', () => {
         description: "ECMAScript 6 represents the biggest update to the core of JavaScript in the history of the language. In Understanding ECMAScript 6, expert developer Nicholas C. Zakas provides a complete guide to the object types, syntax, and other exciting changes that E",
         website: "https://leanpub.com/understandinges6/read"
       });
-      cy.get('#title-wrapper > .col-md-9').should('have.text', 'Understanding ECMAScript 6');
+      cy.get('#title-wrapper #userName-value').should('have.text', 'Understanding ECMAScript 6');
     })
   });

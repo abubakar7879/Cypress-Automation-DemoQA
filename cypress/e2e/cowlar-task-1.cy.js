@@ -9,8 +9,8 @@ beforeEach(() => {
 describe('Task 1: Form Submission Test', () => {
   it('Submits a form with provided details', () => {
     cy.visit('https://demoqa.com/');
-    cy.get('#app > header > a > img').should('have.attr', 'src', '/images/Toolsqa.jpg');
-    cy.get('#app > div > div > div.home-body > div > div:nth-child(2)').click();
+    cy.get('header > a > img[src="/images/Toolsqa.jpg"]').should('have.attr', 'src', '/images/Toolsqa.jpg');
+    cy.get('.category-cards .card').contains('h5', 'Forms').click();
     cy.get(':nth-child(2) > .element-list > .menu-list > #item-0 > .text').click();
     cy.get('#firstName').clear().type('Cowlar');
     cy.get('#lastName').clear().type('Developer');
