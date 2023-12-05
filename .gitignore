@@ -1,0 +1,4 @@
+cypress/downloads/
+cypress/support/
+cypress/fixtures/
+cypress.config.js
